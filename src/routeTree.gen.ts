@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InventariosRouteImport } from './routes/inventarios'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as PlaneacionRouteImport } from './routes/planeacion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventariosRoute = InventariosRouteImport.update({
+  id: '/inventarios',
+  path: '/inventarios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PedidosRoute = PedidosRouteImport.update({
@@ -31,30 +37,34 @@ const PlaneacionRoute = PlaneacionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pedidos' | '/planeacion'
+  fullPaths: '/' | '/inventarios' | '/pedidos' | '/planeacion'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pedidos' | '/planeacion'
-  id: '__root__' | '/' | '/pedidos' | '/planeacion'
+  to: '/' | '/inventarios' | '/pedidos' | '/planeacion'
+  id: '__root__' | '/' | '/inventarios' | '/pedidos' | '/planeacion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InventariosRoute: typeof InventariosRoute
   PedidosRoute: typeof PedidosRoute
   PlaneacionRoute: typeof PlaneacionRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventarios': {
+      id: '/inventarios'
+      path: '/inventarios'
+      fullPath: '/inventarios'
+      preLoaderRoute: typeof InventariosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pedidos': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InventariosRoute: InventariosRoute,
   PedidosRoute: PedidosRoute,
   PlaneacionRoute: PlaneacionRoute,
 }
