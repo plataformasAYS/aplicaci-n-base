@@ -14,6 +14,7 @@ import { Route as AlertasRouteImport } from './routes/alertas'
 import { Route as InventariosRouteImport } from './routes/inventarios'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as PlaneacionRouteImport } from './routes/planeacion'
+import { Route as ReportesRouteImport } from './routes/reportes'
 import { Route as TopesRouteImport } from './routes/topes'
 import { Route as TransitoRouteImport } from './routes/transito'
 
@@ -42,6 +43,11 @@ const PlaneacionRoute = PlaneacionRouteImport.update({
   path: '/planeacion',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportesRoute = ReportesRouteImport.update({
+  id: '/reportes',
+  path: '/reportes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopesRoute = TopesRouteImport.update({
   id: '/topes',
   path: '/topes',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
+  '/reportes': typeof ReportesRoute
   '/topes': typeof TopesRoute
   '/transito': typeof TransitoRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
+  '/reportes': typeof ReportesRoute
   '/topes': typeof TopesRoute
   '/transito': typeof TransitoRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
+  '/reportes': typeof ReportesRoute
   '/topes': typeof TopesRoute
   '/transito': typeof TransitoRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/inventarios'
     | '/pedidos'
     | '/planeacion'
+    | '/reportes'
     | '/topes'
     | '/transito'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/inventarios'
     | '/pedidos'
     | '/planeacion'
+    | '/reportes'
     | '/topes'
     | '/transito'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/inventarios'
     | '/pedidos'
     | '/planeacion'
+    | '/reportes'
     | '/topes'
     | '/transito'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   InventariosRoute: typeof InventariosRoute
   PedidosRoute: typeof PedidosRoute
   PlaneacionRoute: typeof PlaneacionRoute
+  ReportesRoute: typeof ReportesRoute
   TopesRoute: typeof TopesRoute
   TransitoRoute: typeof TransitoRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlaneacionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reportes': {
+      id: '/reportes'
+      path: '/reportes'
+      fullPath: '/reportes'
+      preLoaderRoute: typeof ReportesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/topes': {
       id: '/topes'
       path: '/topes'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventariosRoute: InventariosRoute,
   PedidosRoute: PedidosRoute,
   PlaneacionRoute: PlaneacionRoute,
+  ReportesRoute: ReportesRoute,
   TopesRoute: TopesRoute,
   TransitoRoute: TransitoRoute,
 }
