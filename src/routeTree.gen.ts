@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AlertasRouteImport } from './routes/alertas'
 import { Route as InventariosRouteImport } from './routes/inventarios'
 import { Route as PedidosRouteImport } from './routes/pedidos'
 import { Route as PlaneacionRouteImport } from './routes/planeacion'
@@ -19,6 +20,11 @@ import { Route as TransitoRouteImport } from './routes/transito'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlertasRoute = AlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InventariosRoute = InventariosRouteImport.update({
@@ -49,6 +55,7 @@ const TransitoRoute = TransitoRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alertas': typeof AlertasRoute
   '/inventarios': typeof InventariosRoute
   '/pedidos': typeof PedidosRoute
   '/planeacion': typeof PlaneacionRoute
@@ -75,12 +84,26 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/inventarios' | '/pedidos' | '/planeacion' | '/topes' | '/transito'
+    | '/'
+    | '/alertas'
+    | '/inventarios'
+    | '/pedidos'
+    | '/planeacion'
+    | '/topes'
+    | '/transito'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inventarios' | '/pedidos' | '/planeacion' | '/topes' | '/transito'
+  to:
+    | '/'
+    | '/alertas'
+    | '/inventarios'
+    | '/pedidos'
+    | '/planeacion'
+    | '/topes'
+    | '/transito'
   id:
     | '__root__'
     | '/'
+    | '/alertas'
     | '/inventarios'
     | '/pedidos'
     | '/planeacion'
@@ -90,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlertasRoute: typeof AlertasRoute
   InventariosRoute: typeof InventariosRoute
   PedidosRoute: typeof PedidosRoute
   PlaneacionRoute: typeof PlaneacionRoute
@@ -104,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alertas': {
+      id: '/alertas'
+      path: '/alertas'
+      fullPath: '/alertas'
+      preLoaderRoute: typeof AlertasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inventarios': {
@@ -146,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlertasRoute: AlertasRoute,
   InventariosRoute: InventariosRoute,
   PedidosRoute: PedidosRoute,
   PlaneacionRoute: PlaneacionRoute,
